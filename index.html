@@ -6,23 +6,15 @@
     <title>SmartCart</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body
-    class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center font-sans"
-  >
+  <body class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center font-sans">
     <!-- Cart Card -->
-    <div
-      class="bg-gray-50 border border-gray-300 p-8 rounded-2xl shadow-lg w-full max-w-md transform transition duration-500 hover:scale-105"
-    >
+    <div class="bg-gray-50 border border-gray-300 p-8 rounded-2xl shadow-lg w-full max-w-md transform transition duration-500 hover:scale-105">
       <!-- Header -->
       <div class="text-center mb-6">
-        <h1
-          class="text-2xl font-semibold text-gray-800 tracking-wide flex items-center justify-center gap-2"
-        >
+        <h1 class="text-2xl font-semibold text-gray-800 tracking-wide flex items-center justify-center gap-2">
           🛒 SmartCart
         </h1>
-        <p class="text-gray-500 text-sm">
-          Quick total calculator with delivery
-        </p>
+        <p class="text-gray-500 text-sm">Add multiple items & calculate total with delivery</p>
       </div>
 
       <!-- Form -->
@@ -30,52 +22,25 @@
         <!-- Item -->
         <div>
           <label class="block text-gray-600 font-medium mb-1">Item</label>
-          <input
-            id="item"
-            type="text"
-            class="w-full p-3 rounded-lg border border-gray-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition"
-            placeholder="e.g. Laptop"
-            required
-          />
+          <input id="item" type="text" class="w-full p-3 rounded-lg border border-gray-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition" placeholder="e.g. Laptop" required />
         </div>
 
         <!-- Price -->
         <div>
-          <label class="block text-gray-600 font-medium mb-1"
-            >Price (per unit)</label
-          >
-          <input
-            id="price"
-            type="number"
-            step="0.01"
-            class="w-full p-3 rounded-lg border border-gray-300 focus:border-green-400 focus:ring-2 focus:ring-green-100 outline-none transition"
-            placeholder="e.g. 1200"
-            required
-          />
+          <label class="block text-gray-600 font-medium mb-1">Price (per unit)</label>
+          <input id="price" type="number" step="0.01" class="w-full p-3 rounded-lg border border-gray-300 focus:border-green-400 focus:ring-2 focus:ring-green-100 outline-none transition" placeholder="e.g. 1200" required />
         </div>
 
         <!-- Quantity -->
         <div>
           <label class="block text-gray-600 font-medium mb-1">Quantity</label>
-          <input
-            id="qty"
-            type="number"
-            min="1"
-            class="w-full p-3 rounded-lg border border-gray-300 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 outline-none transition"
-            placeholder="e.g. 2"
-            required
-          />
+          <input id="qty" type="number" min="1" class="w-full p-3 rounded-lg border border-gray-300 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 outline-none transition" placeholder="e.g. 2" required />
         </div>
 
         <!-- Delivery -->
         <div>
-          <label class="block text-gray-600 font-medium mb-1"
-            >Delivery Option</label
-          >
-          <select
-            id="delivery"
-            class="w-full p-3 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition"
-          >
+          <label class="block text-gray-600 font-medium mb-1">Delivery Option</label>
+          <select id="delivery" class="w-full p-3 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition">
             <option value="0">🏬 Pickup (Free)</option>
             <option value="5">🚚 Standard Delivery - $5</option>
             <option value="15">⚡ Express Delivery - $15</option>
@@ -84,86 +49,103 @@
 
         <!-- Buttons -->
         <div class="flex gap-3">
-          <button
-            type="submit"
-            class="flex-1 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold py-3 rounded-lg shadow-md hover:from-blue-600 hover:to-indigo-600 transition transform duration-300 hover:scale-105"
-          >
-            Calculate Total
+          <button type="button" id="addBtn" class="flex-1 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold py-3 rounded-lg shadow-md hover:from-blue-600 hover:to-indigo-600 transition transform duration-300 hover:scale-105">
+            Add to Cart
           </button>
-          <button
-            type="button"
-            id="resetBtn"
-            class="flex-1 bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-400 transition transform duration-300 hover:scale-105"
-          >
+          <button type="button" id="checkoutBtn" class="flex-1 bg-green-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-green-600 transition transform duration-300 hover:scale-105">
+            Checkout
+          </button>
+          <button type="button" id="resetBtn" class="flex-1 bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-400 transition transform duration-300 hover:scale-105">
             Reset
           </button>
         </div>
       </form>
 
+      <!-- Cart Items -->
+      <div id="cartItems" class="mt-6 space-y-2 text-gray-700"></div>
+
       <!-- Result Section -->
-      <div
-        id="result"
-        class="mt-6 text-center text-lg font-semibold text-gray-700 opacity-0 transition duration-700"
-      ></div>
+      <div id="result" class="mt-6 text-center text-lg font-semibold text-gray-700 opacity-0 transition duration-700"></div>
 
       <!-- Footer -->
       <div class="mt-6 text-center text-gray-400 text-xs">
-        © 2025 SmartCart • Simple & Secure
+        © 2025 SmartCart • Multi-item Calculator
       </div>
     </div>
 
     <script>
-      const form = document.getElementById("cartForm");
+      const addBtn = document.getElementById("addBtn");
+      const checkoutBtn = document.getElementById("checkoutBtn");
       const resetBtn = document.getElementById("resetBtn");
+      const cartItemsBox = document.getElementById("cartItems");
       const resultBox = document.getElementById("result");
+      const form = document.getElementById("cartForm");
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
+      let cart = [];
 
+      // Add to cart
+      addBtn.addEventListener("click", function () {
         let item = document.getElementById("item").value;
         let price = parseFloat(document.getElementById("price").value);
         let qty = parseInt(document.getElementById("qty").value);
-        let delivery = parseFloat(document.getElementById("delivery").value);
 
-        if (isNaN(price) || isNaN(qty) || qty <= 0) {
-          resultBox.textContent = "⚠️ Please enter valid values.";
-          resultBox.classList.remove("text-gray-700");
-          resultBox.classList.add("text-red-500");
-          resultBox.style.opacity = "1";
+        if (!item || isNaN(price) || isNaN(qty) || qty <= 0) {
+          alert("⚠️ Please enter valid values.");
           return;
         }
 
         let subtotal = price * qty;
-        let total = subtotal + delivery;
+        cart.push({ item, price, qty, subtotal });
 
-        resultBox.innerHTML = `
-        <div class="bg-white shadow-inner rounded-lg p-4 border border-gray-200 inline-block">
-          <p class="text-gray-800 font-mono tracking-wide">
-            ${item} × ${qty} → 💵 $${subtotal.toFixed(2)}
-          </p>
-          <p class="text-gray-600 text-sm mt-2">Delivery Fee: $${delivery.toFixed(
-            2
-          )}</p>
-          <hr class="my-2">
-          <p class="text-xl font-bold text-green-600">Total: $${total.toFixed(
-            2
-          )}</p>
-        </div>
-      `;
+        // Show cart items
+        displayCart();
 
-        resultBox.classList.remove("text-red-500");
-        resultBox.classList.add("text-gray-700");
-        setTimeout(() => {
-          resultBox.style.opacity = "1";
-        }, 100);
+        // Clear inputs
+        form.reset();
       });
 
-      // Reset functionality
+      // Checkout
+      checkoutBtn.addEventListener("click", function () {
+        let delivery = parseFloat(document.getElementById("delivery").value);
+        let grandTotal = cart.reduce((sum, i) => sum + i.subtotal, 0) + delivery;
+
+        if (cart.length === 0) {
+          resultBox.textContent = "⚠️ Cart is empty!";
+          resultBox.classList.add("text-red-500");
+        } else {
+          resultBox.innerHTML = `
+            <div class="bg-white shadow-inner rounded-lg p-4 border border-gray-200 inline-block">
+              <p class="text-gray-800 font-mono tracking-wide">Items: ${cart.length}</p>
+              <p class="text-gray-600 text-sm mt-2">Delivery Fee: $${delivery.toFixed(2)}</p>
+              <hr class="my-2">
+              <p class="text-xl font-bold text-green-600">Grand Total: $${grandTotal.toFixed(2)}</p>
+            </div>
+          `;
+        }
+        resultBox.style.opacity = "1";
+      });
+
+      // Reset cart
       resetBtn.addEventListener("click", function () {
-        form.reset();
+        cart = [];
+        cartItemsBox.innerHTML = "";
         resultBox.innerHTML = "";
         resultBox.style.opacity = "0";
+        form.reset();
       });
+
+      // Function to display cart
+      function displayCart() {
+        cartItemsBox.innerHTML = cart
+          .map(
+            (i, idx) =>
+              `<div class="flex justify-between bg-white p-3 rounded-lg shadow border">
+                <span>${idx + 1}. ${i.item} × ${i.qty}</span>
+                <span class="font-semibold">$${i.subtotal.toFixed(2)}</span>
+              </div>`
+          )
+          .join("");
+      }
     </script>
   </body>
 </html>
